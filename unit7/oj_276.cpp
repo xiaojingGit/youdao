@@ -3,12 +3,13 @@
 // 算术表达式的格式为（运算符前后可能有空格）： 运算数 运算符 运算数 请输出相应的结果。
 
 #include <iostream>
+#include <cmath>
 using namespace std;
 int main() {
 	string str, num1, num2;
 	char opt = ' ';  // 运算符
 
-	cin >> str;
+	getline(cin, str);
 
 	int len = str.size();
 
@@ -19,7 +20,7 @@ int main() {
 			} else {
 				num2 = num2 + str[i];
 			}
-		} else {
+		} else if (str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/' || str[i] == '%') {
 			opt = str[i];
 		}
 	}
@@ -28,18 +29,24 @@ int main() {
 
 	int val1 = 0, val2 = 0;
 	for (int i = len1 - 1; i >= 0; i--) {
-		
+		int tmp = num1[i] - '0';
+		val1 = val1 + tmp * pow(10, len1-i-1);
+	
+	}
+	for (int i = len2 - 1; i >= 0; i--) {
+		int tmp = num2[i] - '0';
+		val2 = val2 + tmp * pow(10, len2-i-1);
 	}
 	if (opt == '+') {
-		cout << num1 + num2;
+		cout << val1 + val2;
 	} else if (opt == '-') {
-
+		cout << val1 - val2;
 	} else if (opt == '*') {
-
+		cout << val1 * val2;
 	} else if (opt == '/') {
-
+		cout << val1 / val2;
 	} else if (opt == '%') {
-
+		cout << val1 % val2;
 	}
 	return 0;
 }
