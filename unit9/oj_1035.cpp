@@ -30,6 +30,10 @@ int main() {
   int a, b, tenRes = 0, arr[123];
   string n;
   cin >> a >> n >> b;
+  // 测试点1: 输入为0时，直接输出结果0
+  if (n == "0") {
+    cout << 0;
+  }
   // 先初始化a-z/A-Z为 10、11、12...36
   for (int i = 97; i < 123; i++) {
     arr[i] = 10 + i - 97;
