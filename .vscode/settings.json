@@ -6,6 +6,10 @@
 		"iosfwd": "cpp",
 		"ostream": "cpp",
 		"vector": "cpp",
-		"algorithm": "cpp"
+		"algorithm": "cpp",
+		"__bit_reference": "cpp",
+		"bitset": "cpp",
+		"chrono": "cpp",
+		"unordered_map": "cpp"
 	}
 }

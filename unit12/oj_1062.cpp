@@ -20,25 +20,32 @@ using namespace std;
 
 // 思路，先排序再判断
 int main() {
-  int arr[16], n=0, count=0;
-  while (cin >> arr[n]) {
-    n++;
+  int arr[16], n=0, count=0, tmp;
+  cin >> tmp;
+  if (tmp == 0) {
+    cout << 0;
+    return 0;
+  }
+  arr[n++] = tmp;
+  while (tmp != 0) {
+    cin >> tmp;
+    arr[n++] = tmp;
   }
   sort(arr, arr+n);
-  int p1 = 0, p2 = n-1;
-  while (p1 < p2) {
-    if (arr[p1] == 0) {
-      p1++;
-    } else {
-      if (arr[p2] - arr[p1] < arr[p1]) {
-        break;
-      } else if (arr[p2] - arr[p1] > arr[p1]) {
-        p2--;
-      } else {
+  if (arr[n-1] - arr[0] < arr[0]) {
+    cout << 0;
+  }
+  for (int i = 0; i < n - 1; i++) {
+    for (int j = n - 1; j >= 0 && j > i; j--) {
+      if (arr[j] - arr[i] == arr[i]) {
         count++;
-        p1++;
+      } else if (arr[j] - arr[i] < arr[i]) {
+        break;
       }
     }
   }
+  cout << count;
+  
   return 0;
 }
+// 1 2 3 4 7 9 18 22 44
