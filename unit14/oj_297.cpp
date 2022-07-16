@@ -14,9 +14,16 @@
 #include <cstdio>
 
 int main() {
-	int n, arr[10001];
+	int n;
 	scanf("%d", &n);
 	double res = 0;
-	arr[1] = 1;
+	for (int i = 1; i <= n; i++) {
+		if (i % 2 != 0) {
+			res += (double)1 / i;
+		} else {
+			res -= (double)1 / i;
+		}
+	}
+	printf("%.4lf", res);
 	return 0;
 }
