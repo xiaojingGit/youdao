@@ -15,8 +15,31 @@
 
 #include <cstdio>
 #include <cstring>
+#include <iostream>
+using namespace std;
 
 int main() {
+  string c1, c2="";
+  cin >> c1;
+  int len = c1.size();
+  for (int i = 0; i < len; i++) {
+    if (c1[i] == 'A') {
+      c2 += 'T';
+    } else if (c1[i] == 'T') {
+      c2 += 'A';
+    } else if (c1[i] == 'G') {
+      c2 += 'C';
+    } else {
+      c2 += 'G';
+    }
+  }
+  cout << c2;
+  return 0;
+}
+
+
+// 测试点丢在哪不知道
+int main1() {
   char c1[256], c2[256];
   scanf("%s", c1);
   int len = strlen(c1);

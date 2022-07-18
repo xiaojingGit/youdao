@@ -17,3 +17,11 @@
 // 输出整数n，表示答案应该是直线 x=n。 如果必要的话，x=R也可以是答案。
 // 输出样例
 // 5
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	
+	return 0;
+}
