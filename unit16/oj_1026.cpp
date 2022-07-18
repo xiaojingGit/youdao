@@ -21,7 +21,24 @@
 #include <iostream>
 using namespace std;
 
+// x（L）轴代表列，y（T）轴代表行
 int main() {
-	
+	int R, N, arr[100][100] = {{0}};
+	cin >> R >> N;
+	int L, T, W, H;
+	for (int i = 0; i < N; i++) {
+		cin >> L >> T >> W >> H;
+		for (int j = T; j <= T + H; j++) {   
+			for (int k = L; k <= L + W; k++) {
+				arr[j][k] = 1;
+			}
+		}
+	}
+	for (int i = 0; i < R; i++) {
+		for (int j = 0; j < R; j++) {
+			cout << arr[i][j] << " ";
+		}
+		cout << endl;
+	}
 	return 0;
 }
