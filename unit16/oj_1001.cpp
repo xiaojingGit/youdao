@@ -22,3 +22,35 @@
 // 512
 // 3 
 // 255
+
+#include <cmath>
+#include <iostream>
+using namespace std;
+
+int main() {
+  int d, i;  // 叶子深度，小球个数,
+  while (cin >> d >> i) {
+    int diaoluo = 1; // 掉落小球
+    int last = 1; // 掉落位置初始为1
+    int arr[1024] = {0}; // 最大深度不超过10，则pow(2, 10) = 1024
+    while (diaoluo <= i) {
+      last = 1;
+      // 掉落到第j层
+      for (int j = 1; j < d; j++) {
+        // 开关需要改变，而不是打开就不关闭
+        if (arr[last] == 0) {
+          arr[last] = 1;
+          last = 2 * last;
+        } else {
+          arr[last] = 0;
+          last = 2 * last + 1;
+        }
+      }
+      if (diaoluo == i) {
+        cout << last << endl;
+      }
+      diaoluo++;
+    }
+  }
+  return 0;
+}
