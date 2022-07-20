@@ -18,27 +18,60 @@
 // 输出样例
 // 5
 
+// 思路：
+// 1. 可以把小矩形面积都计算出来，存到一维数组中，则变成了求数组怎么分割可以让两边的和差最小，如果和之差最小有多处位置，则应该取后边分割的点，才能保证大矩形左边最大
+// 缺失：题目说直线还可能穿过小矩形
+// 以下面这种思路来
+// 2. 算出每一列小矩形的面积，存储到数组中，如arr[0]表示0到1小矩形面积， 然后用二分法求解
+
 #include <iostream>
 using namespace std;
 
 // x（L）轴代表列，y（T）轴代表行
 int main() {
-	int R, N, arr[100][100] = {{0}};
+	int R, N, arr[100001]={0}, maxR=-1, minL=100001; // arr用来存取每列小矩形的面积, 小矩形右边最大坐标
 	cin >> R >> N;
 	int L, T, W, H;
 	for (int i = 0; i < N; i++) {
 		cin >> L >> T >> W >> H;
-		for (int j = T; j <= T + H; j++) {   
-			for (int k = L; k <= L + W; k++) {
-				arr[j][k] = 1;
-			}
+		if(maxR < L + W) {
+			maxR = L + W;
+		}
+		if (minL > L) {
+			minL = L;
+		}
+		for (int j = L; j < L + W; j++) {
+			arr[j] += H;
 		}
 	}
-	for (int i = 0; i < R; i++) {
-		for (int j = 0; j < R; j++) {
-			cout << arr[i][j] << " ";
+
+	long long sumL=0, sumR=0; // sumL左边面积，sumR右边面积
+	int l=minL, r=maxR, mid;
+	while (l < r) {
+		mid = (l + r) / 2;
+		for (int i = 0; i <= mid; i++) {
+			sumL += arr[i];
 		}
-		cout << endl;
+		for (int j = mid + 1; j <= maxR; j++) {
+			sumR += arr[j];
+		}
+		if (sumL < sumR) {
+			l += 1;  // 加1 mid求值不会改变
+		} else {
+			break;  // 当左边面积之和第一次超出右边时，则跳出循环
+		}
+		sumL = 0;
+		sumR = 0;
 	}
+
+	// 保证大矩形在左边面积最大
+	while(mid <= maxR) {
+		if (arr[mid] == 0) {
+			mid++;
+		} else {
+			break;
+		}
+	}
+	cout << mid;	
 	return 0;
 }

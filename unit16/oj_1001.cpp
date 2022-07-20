@@ -23,6 +23,12 @@
 // 3 
 // 255
 
+// 思路：一个数组即可
+// 假设深度为3，可以看出左子节点始终是父节点的两倍，右子节点是父节点的两倍+1
+// 			1
+// 	 2			3
+// 4	 5	6		7
+
 #include <cmath>
 #include <iostream>
 using namespace std;
