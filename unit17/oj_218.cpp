@@ -22,3 +22,45 @@
 // (1,3) (2,3) (3,3) (4,3)
 // (1,2) (2,3) (3,4)
 // (4,1) (3,2) (2,3) (1,4)
+
+#include <cstdio>
+
+int main() {
+  int N, i, j;
+  scanf("%d%d%d", &N, &i, &j);
+
+  // 输出同行格子位置
+  for (int col = 1; col <= N; col++) {
+    printf("(%d,%d) ", i, col);
+  }
+  printf("\n");
+  // 输出同列格子位置
+  for (int row = 1; row <= N; row++) {
+    printf("(%d,%d) ", row, j);
+  }
+  printf("\n");
+  // 输出从左上到右下格子位置（从左上到右下，计算行的起始位置，行列同时减1，直到某一个等于1停止）
+  int row=i, col = j;
+  while(row >1 && col > 1) {
+    row--;
+    col--;
+  }
+  while(row <= N && col <= N) {
+    printf("(%d,%d) ", row, col);
+    row++;
+    col++;
+  }
+  printf("\n");  
+  // 输出从右上到左下格子位置（从左下到右上，计算行列起始位置，行+1，列减1， 直到行等于N或者列等于1停止）
+  row = i, col = j;
+  while (row < N && col > 1) {
+    row++;
+    col--;
+  }
+  while(row >= 1 && col <= N){
+    printf("(%d,%d) ", row, col);
+    row--;
+    col++;
+  }
+  return 0;
+}

@@ -47,16 +47,17 @@ int main() {
 
 	long long sumL=0, sumR=0; // sumL左边面积，sumR右边面积
 	int l=minL, r=maxR, mid;
-	while (l < r) {
+	// 必须是l <= r （例子 1 1 1 1）
+	while (l <= r) {
 		mid = (l + r) / 2;
-		for (int i = 0; i <= mid; i++) {
+		for (int i = 0; i < mid; i++) {
 			sumL += arr[i];
 		}
-		for (int j = mid + 1; j <= maxR; j++) {
+		for (int j = mid; j <= maxR; j++) {
 			sumR += arr[j];
 		}
 		if (sumL < sumR) {
-			l += 1;  // 加1 mid求值不会改变
+			l += 1;  // 加1 mid求值不会改变，直接+2，可保证mid往后挪一个坐标
 		} else {
 			break;  // 当左边面积之和第一次超出右边时，则跳出循环
 		}
@@ -65,7 +66,7 @@ int main() {
 	}
 
 	// 保证大矩形在左边面积最大
-	while(mid <= maxR) {
+	while(mid < R) {
 		if (arr[mid] == 0) {
 			mid++;
 		} else {
