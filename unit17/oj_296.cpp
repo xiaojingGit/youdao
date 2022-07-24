@@ -11,3 +11,24 @@
 // 输出有一行，包含一个浮点数，表示分数序列前n项的和，精确到小数点后4位。
 // 输出样例
 // 3.5000
+
+#include <cstdio>
+
+int main() {
+  int n;
+  double sum = 0;
+  scanf("%d", &n);
+
+  double q = 2, p = 1;
+
+  while(n > 0) {
+    sum += q/p;
+    double tmp = p;
+    p = q;
+    q = tmp + q;
+    n--;
+  }
+  
+  printf("%.4lf", sum);
+  return 0;
+}
