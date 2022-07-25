@@ -21,3 +21,21 @@
 // （3） 相邻整数之间有单个空格。
 // 输出样例
 // 1248 245 1488 95 624 846 86 211 
+
+#include <cstdio>
+
+int main() {
+  int n, a;
+  scanf("%d", &n);
+  if (!n) {
+    printf("0");
+  }
+  n++;
+  while(n--) {
+    scanf("%d", &a);
+    if (n) {
+      printf("%d ", a * n);
+    }
+  }
+  return 0;
+}
