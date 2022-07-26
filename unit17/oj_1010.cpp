@@ -14,3 +14,29 @@
 // 输出样例
 // 1
 // 408
+
+#include <iostream>
+using namespace std;
+
+int arr[1000001] = {0, 1, 2}; // 全局声明，未初始化项为0
+
+int main() {
+  int n, k;
+  cin >> n;
+
+  for (int i = 0; i < n; i++) {
+    cin >> k;
+    for (int j = 1; j <= k; j++) {
+      if (arr[j] != 0) {
+        continue;
+      }
+      // 不能在循环结束取模，不知道为什么
+      // arr[j] = 2 * arr[j-1] + arr[j-2];
+      arr[j] = (2 * arr[j-1] + arr[j-2]) % 32767;
+    }
+    // cout << arr[k] % 32767;
+    cout << arr[k] << endl;
+  }
+
+  return 0;
+}
