@@ -19,3 +19,59 @@
 // 0 0 0 0 0 0 0 0 0
 // 0 0 0 0 0 0 0 0 0
 // 0 0 0 0 0 0 0 0 0
+
+#include <iostream>
+using namespace std;
+
+int arr[9][9] = {0};
+int main() {
+	int m, n;
+	cin >> m >> n;
+
+	int minRow = 4, minCol = 4, maxRow = 4, maxCol = 4; // 代表扩散最大边界
+	arr[4][4] = m; // 正中心位置m个细菌
+
+	int k = n;
+	while(n) {
+		for (int i = minRow; i <= maxRow; i++) {
+			for (int j = minCol; j <= maxCol; j++) {
+				cout << minRow << " " << maxRow << " " << minCol << " " << maxCol << endl;
+				arr[i-1][j] += arr[i][j];
+				arr[i-1][j+1] += arr[i][j];
+				arr[i-1][j-1] += arr[i][j];
+				arr[i][j-1] += arr[i][j];
+				arr[i][j+1] += arr[i][j];
+				arr[i+1][j] += arr[i][j];
+				arr[i+1][j+1] += arr[i][j];
+				arr[i+1][j-1] += arr[i][j];
+				arr[i][j] = 2 * arr[i][j];
+			}
+			cout << endl;
+		}
+		// cout << minRow << " " << maxRow << " " << minCol << " " << maxCol << endl;
+		minRow--;
+		maxRow++;
+		minCol--;
+		maxCol++;
+		n--;
+	}
+	
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			cout << arr[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	return 0;
+}
+
+// 0 0 0 0 0 0 0 0 0
+// 0 0 0 0 0 0 0 0 0
+// 0 0 2 2 2 0 0 0 0
+// 0 0 2 2 4 2 0 0 0
+// 0 0 2 4 6 2 0 0 0
+// 0 0 0 2 2 2 0 0 0
+// 0 0 0 0 0 0 0 0 0
+// 0 0 0 0 0 0 0 0 0
+// 0 0 0 0 0 0 0 0 0
