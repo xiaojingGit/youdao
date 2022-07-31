@@ -16,3 +16,25 @@
 // 输出仅一行，血压连续正常的最长小时数。
 // 输出样例
 // 2
+
+#include <cstdio>
+int main() {
+  int n, a, b, count = 0, max=0;
+  scanf("%d", &n);
+  for (int i = 0; i < n; i++) {
+    scanf("%d%d", &a, &b);
+    if (a >= 90 && a <= 140 && b >= 60 && b <= 90) {
+      count++;
+      if (i == n-1 && max < count) {
+        max = count;
+      }
+    } else {
+      if (max < count) {
+        max = count;
+      }
+      count = 0;
+    }
+  }
+  printf("%d", max);
+  return 0;
+}
