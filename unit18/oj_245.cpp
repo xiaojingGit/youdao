@@ -12,3 +12,36 @@
 // 若存在连续出现至少k次的字符，输出该字符；否则输出No。
 // 输出样例
 // c
+
+#include <string>
+#include <iostream>
+using namespace std;
+
+int main() {
+  int k;
+  string str;
+  cin >> k;
+  cin >> str;
+  int len = str.size();
+  if (k == 1) {
+    cout << str[0];
+    return 0;
+  }
+
+  int p1=0, p2=1, count=1;
+  while(p2 < len) {
+    if(str[p1] == str[p2]) {
+      count++;
+    } else {
+      count=1;
+      p1=p2;
+    }
+    p2++;
+    if (count == k) {
+      cout << str[p1];
+      return 0;
+    }
+  }
+  cout << "No";
+  return 0;
+}

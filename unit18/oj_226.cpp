@@ -48,7 +48,6 @@ int main() {
 			}
 			cout << endl;
 		}
-		// cout << minRow << " " << maxRow << " " << minCol << " " << maxCol << endl;
 		minRow--;
 		maxRow++;
 		minCol--;
