@@ -27,3 +27,49 @@
 // Ans.13: 4210818
 // Ans.14: 9800817
 // Ans.15: 9926315
+
+#include <cstdio>
+#include <cmath>
+
+int arr[9][8] = {0};
+int isShuixianhua(int num, int n) {
+	int sum = 0;
+	int num2 = num;
+	while (num2) {
+		int yu = num2 % 10;
+		// 测试点，存储0-9的 3-7次方，如果有直接取
+		if (!arr[yu][n]) {
+			arr[yu][n] = pow(yu, n);
+		}
+		sum += arr[yu][n];
+		num2 = num2 / 10;
+		if (sum > num) {
+			return 0;
+		}
+	}
+	if (sum == num) {
+		return 1;
+	}
+	return 0;
+}
+int main() {
+	int count = 0;
+	for (int i = 100; i <= 9999999; i++) {
+		int flag = 0;
+		if (i >= 100 && i <= 999) {
+			flag = isShuixianhua(i, 3);
+		} else if (i >= 1000 && i <= 9999) {
+			flag = isShuixianhua(i, 4);
+		} else if (i >= 10000 && i <= 99999) {
+			flag = isShuixianhua(i, 5);
+		} else if (i >= 100000 && i <= 999999) {
+			flag = isShuixianhua(i, 6);
+		} else {
+			flag = isShuixianhua(i, 7);
+		}
+		if (flag) {
+			printf("Ans.%d: %d\n", ++count, i);
+		}
+	}
+	return 0;
+}
