@@ -30,7 +30,8 @@
 using namespace std;
 int arr[100] = {0};
 int isZhishu(int n) {
-	if (n == 1) {
+	// n == 0 是一个测试点
+	if (n == 1 || n == 0) {
 		return 0;
 	}
 	if (arr[n] == -1) { // 不是质数
