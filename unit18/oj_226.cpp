@@ -20,48 +20,45 @@
 // 0 0 0 0 0 0 0 0 0
 // 0 0 0 0 0 0 0 0 0
 
-#include <iostream>
-using namespace std;
-
-int arr[9][9] = {0};
-int main() {
-	int m, n;
-	cin >> m >> n;
-
-	int minRow = 4, minCol = 4, maxRow = 4, maxCol = 4; // 代表扩散最大边界
-	arr[4][4] = m; // 正中心位置m个细菌
-
-	int k = n;
-	while(n) {
-		for (int i = minRow; i <= maxRow; i++) {
-			for (int j = minCol; j <= maxCol; j++) {
-				cout << minRow << " " << maxRow << " " << minCol << " " << maxCol << endl;
-				arr[i-1][j] += arr[i][j];
-				arr[i-1][j+1] += arr[i][j];
-				arr[i-1][j-1] += arr[i][j];
-				arr[i][j-1] += arr[i][j];
-				arr[i][j+1] += arr[i][j];
-				arr[i+1][j] += arr[i][j];
-				arr[i+1][j+1] += arr[i][j];
-				arr[i+1][j-1] += arr[i][j];
-				arr[i][j] = 2 * arr[i][j];
-			}
-			cout << endl;
-		}
-		minRow--;
-		maxRow++;
-		minCol--;
-		maxCol++;
-		n--;
-	}
-	
+#include<stdio.h>
+int main()
+{
+	int c[9][9], d[9][9];//旧的培养基和新的培养基，用于递推
+	int m, n;//初始中央细菌数以及递推的天数
+	scanf("%d%d", &m, &n);
 	for (int i = 0; i < 9; i++) {
 		for (int j = 0; j < 9; j++) {
-			cout << arr[i][j] << " ";
+			d[i][j] = 0;//变量的初始化
 		}
-		cout << endl;
 	}
-
+	d[4][4] = m;//中央细菌已经长出
+	for (int k = 1; k <= n; k++) {//开始递推
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				c[i][j] = d[i][j];//旧培养基相当于一个储存容器，储存上一天的培养基情况
+				d[i][j] = 2 * d[i][j];//每个位置上的每个旧细菌生两个崽，然后凋亡
+			}
+		}
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				if (c[i][j] != 0) {//如果旧培养基上某个位置有细菌，就在新培养基上它的周围生出一圈崽儿（记得每个细菌各生一圈儿……）
+					d[i - 1][j - 1] = d[i - 1][j - 1] + c[i][j];
+					d[i - 1][j] = d[i - 1][j] + c[i][j];
+					d[i - 1][j + 1] = d[i - 1][j + 1] + c[i][j];
+					d[i][j - 1] = d[i][j - 1] + c[i][j];
+					d[i][j + 1] = d[i][j + 1] + c[i][j];
+					d[i + 1][j - 1] = d[i + 1][j - 1] + c[i][j];
+					d[i + 1][j] = d[i + 1][j] + c[i][j];
+					d[i + 1][j + 1] = d[i + 1][j + 1] + c[i][j];
+				}
+			}
+		}
+	}
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++)
+			printf("%d ", d[i][j]);
+		printf("\n");
+	}
 	return 0;
 }
 
